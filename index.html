@@ -6,13 +6,11 @@
     <title>Dark Arena Lore — Clash Royale Dark Lore Series</title>
     <meta name="description" content="The stories Clash Royale never told you. Dark cinematic lore series.">
 
-    <!-- Open Graph -->
     <meta property="og:title" content="Dark Arena Lore — Clash Royale Dark Lore">
     <meta property="og:description" content="The stories Clash Royale never told you 💀">
     <meta property="og:type" content="website">
     <meta property="og:image" content="https://raw.githubusercontent.com/thehiddencrowncr/thehiddencrowncr.github.io/main/channels4_profile.jpg">
 
-    <!-- Favicon -->
     <link rel="icon" type="image/png"
           href="https://raw.githubusercontent.com/thehiddencrowncr/thehiddencrowncr.github.io/main/channels4_profile.jpg">
 
@@ -29,29 +27,111 @@
             align-items:flex-start;
             padding:40px 20px 60px;
             background:#0a0a12;
-            background-image:
-                radial-gradient(ellipse at 50% 0%, rgba(88,28,135,.15) 0%, transparent 60%),
-                radial-gradient(ellipse at 50% 100%, rgba(30,10,60,.2) 0%, transparent 60%);
             overflow-x:hidden;
+        }
+
+        /* ── animated background blobs ── */
+        body::before,
+        body::after {
+            content:'';
+            position:fixed;
+            border-radius:50%;
+            filter:blur(120px);
+            pointer-events:none;
+            z-index:0;
+        }
+        body::before {
+            width:600px; height:600px;
+            top:-200px; left:50%;
+            transform:translateX(-50%);
+            background:rgba(88,28,135,.2);
+            animation:blobBreathe 6s ease-in-out infinite;
+        }
+        body::after {
+            width:500px; height:500px;
+            bottom:-150px; left:50%;
+            transform:translateX(-50%);
+            background:rgba(139,92,246,.12);
+            animation:blobBreathe 7s ease-in-out infinite 1s;
+        }
+
+        @keyframes blobBreathe {
+            0%,100% { opacity:.5; transform:translateX(-50%) scale(1); }
+            50%     { opacity:1;  transform:translateX(-50%) scale(1.15); }
+        }
+
+        /* floating particles */
+        .particles {
+            position:fixed;
+            inset:0;
+            pointer-events:none;
+            z-index:0;
+            overflow:hidden;
+        }
+        .particle {
+            position:absolute;
+            width:3px; height:3px;
+            background:#a855f7;
+            border-radius:50%;
+            opacity:0;
+            animation:particleFloat linear infinite;
+        }
+
+        @keyframes particleFloat {
+            0%   { opacity:0; transform:translateY(0) scale(.5); }
+            10%  { opacity:.6; }
+            90%  { opacity:.3; }
+            100% { opacity:0; transform:translateY(-100vh) scale(0); }
         }
 
         .container {
             max-width:420px;
             width:100%;
+            position:relative;
+            z-index:1;
         }
 
+        /* ── header ── */
         .header {
             text-align:center;
             margin-bottom:32px;
+            animation:fadeSlideUp .8s ease-out both;
+        }
+
+        .avatar-wrap {
+            position:relative;
+            display:inline-block;
+            margin-bottom:16px;
+        }
+
+        .avatar-glow {
+            position:absolute;
+            inset:-12px;
+            border-radius:50%;
+            background:radial-gradient(circle, rgba(168,85,247,.35) 0%, transparent 70%);
+            animation:glowPulse 3s ease-in-out infinite;
+            z-index:0;
+        }
+
+        @keyframes glowPulse {
+            0%,100% { opacity:.4; transform:scale(.95); }
+            50%     { opacity:1;  transform:scale(1.1); }
         }
 
         .avatar {
+            position:relative;
+            z-index:1;
             width:110px;
             height:110px;
             border-radius:50%;
             object-fit:cover;
-            margin-bottom:16px;
-            border:3px solid #1a1a2e;
+            border:3px solid rgba(168,85,247,.3);
+            animation:avatarBreathe 4s ease-in-out infinite;
+        }
+
+        @keyframes avatarBreathe {
+            0%,100% { box-shadow:0 0 20px rgba(168,85,247,.15); }
+            50%     { box-shadow:0 0 40px rgba(168,85,247,.35); }
         }
 
         .brand-name {
@@ -60,6 +140,12 @@
             color:#e2e0ff;
             text-transform:uppercase;
             margin-bottom:6px;
+            animation:textGlow 4s ease-in-out infinite;
+        }
+
+        @keyframes textGlow {
+            0%,100% { text-shadow:0 0 8px rgba(168,85,247,.1); }
+            50%     { text-shadow:0 0 20px rgba(168,85,247,.3), 0 0 40px rgba(168,85,247,.1); }
         }
 
         .tagline {
@@ -68,6 +154,7 @@
             line-height:1.5;
         }
 
+        /* ── featured ── */
         .featured {
             background:linear-gradient(135deg, rgba(88,28,135,.3), rgba(30,10,60,.4));
             border:1px solid rgba(168,85,247,.2);
@@ -75,7 +162,32 @@
             padding:16px;
             margin-bottom:24px;
             text-align:center;
+            position:relative;
+            overflow:hidden;
+            animation:fadeSlideUp .8s ease-out .15s both;
         }
+
+        .featured::before {
+            content:'';
+            position:absolute;
+            inset:-1px;
+            border-radius:16px;
+            padding:1px;
+            background:linear-gradient(135deg, rgba(168,85,247,.3), transparent, rgba(168,85,247,.15));
+            -webkit-mask:linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite:xor;
+            mask-composite:exclude;
+            animation:borderGlow 3s ease-in-out infinite;
+            pointer-events:none;
+        }
+
+        @keyframes borderGlow {
+            0%,100% { opacity:.4; }
+            50%     { opacity:1; }
+        }
+
+        .featured strong { color:#c4b5fd; }
+        .featured > div:nth-child(2) { color:#a09abc; margin-top:6px; font-size:14px; }
 
         .featured-btn {
             display:inline-block;
@@ -87,8 +199,30 @@
             font-size:14px;
             font-weight:700;
             margin-top:12px;
+            position:relative;
+            transition:transform .25s ease, box-shadow .25s ease;
+        }
+        .featured-btn:hover {
+            transform:translateY(-2px) scale(1.03);
+            box-shadow:0 8px 30px rgba(168,85,247,.4);
         }
 
+        /* shimmer on button */
+        .featured-btn::after {
+            content:'';
+            position:absolute;
+            top:0; left:-75%;
+            width:50%; height:100%;
+            background:linear-gradient(120deg, transparent, rgba(255,255,255,.15), transparent);
+            border-radius:50px;
+            animation:shimmer 3s ease-in-out infinite;
+        }
+        @keyframes shimmer {
+            0%   { left:-75%; }
+            100% { left:125%; }
+        }
+
+        /* ── social links ── */
         .links {
             display:flex;
             flex-direction:column;
@@ -98,8 +232,8 @@
 
         .link-btn {
             display:flex;
-            justify-content:space-between;
             align-items:center;
+            gap:14px;
             background:rgba(26,26,46,.8);
             border:1px solid rgba(168,85,247,.12);
             border-radius:14px;
@@ -108,13 +242,71 @@
             color:#d4d0f0;
             font-size:15px;
             font-weight:600;
+            position:relative;
+            overflow:hidden;
+            transition:transform .25s ease, border-color .3s ease, box-shadow .3s ease;
+            animation:fadeSlideUp .6s ease-out both;
         }
 
+        .link-btn:nth-child(1) { animation-delay:.25s; }
+        .link-btn:nth-child(2) { animation-delay:.35s; }
+        .link-btn:nth-child(3) { animation-delay:.45s; }
+        .link-btn:nth-child(4) { animation-delay:.55s; }
+        .link-btn:nth-child(5) { animation-delay:.65s; }
+
+        .link-btn:hover {
+            transform:translateY(-3px) scale(1.02);
+            border-color:rgba(168,85,247,.35);
+            box-shadow:0 8px 32px rgba(168,85,247,.15);
+        }
+
+        /* hover glow sweep */
+        .link-btn::before {
+            content:'';
+            position:absolute;
+            top:0; left:-100%;
+            width:100%; height:100%;
+            background:linear-gradient(90deg, transparent, rgba(168,85,247,.06), transparent);
+            transition:left .5s ease;
+        }
+        .link-btn:hover::before { left:100%; }
+
+        .link-icon {
+            width:24px; height:24px;
+            flex-shrink:0;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+        }
+        .link-icon svg {
+            width:22px; height:22px;
+            fill:currentColor;
+        }
+
+        .link-text { flex:1; }
+        .link-arrow { color:#6b6590; font-size:18px; transition:transform .25s ease; }
+        .link-btn:hover .link-arrow { transform:translateX(4px); color:#a855f7; }
+
+        /* brand colors on hover */
+        .link-btn.yt:hover    { border-color:rgba(255,0,0,.3);   box-shadow:0 8px 32px rgba(255,0,0,.1); }
+        .link-btn.tt:hover    { border-color:rgba(0,242,234,.3); box-shadow:0 8px 32px rgba(0,242,234,.1); }
+        .link-btn.ig:hover    { border-color:rgba(225,48,108,.3);box-shadow:0 8px 32px rgba(225,48,108,.1); }
+        .link-btn.tw:hover    { border-color:rgba(255,255,255,.2);box-shadow:0 8px 32px rgba(255,255,255,.06); }
+        .link-btn.th:hover    { border-color:rgba(255,255,255,.2);box-shadow:0 8px 32px rgba(255,255,255,.06); }
+
+        .link-btn.yt:hover .link-icon { color:#ff0000; }
+        .link-btn.tt:hover .link-icon { color:#00f2ea; }
+        .link-btn.ig:hover .link-icon { color:#e1306c; }
+        .link-btn.tw:hover .link-icon { color:#ffffff; }
+        .link-btn.th:hover .link-icon { color:#ffffff; }
+
+        /* ── stats ── */
         .stats {
             display:grid;
             grid-template-columns:repeat(3,1fr);
             gap:10px;
             margin-bottom:32px;
+            animation:fadeSlideUp .6s ease-out .75s both;
         }
 
         .stat-box {
@@ -123,12 +315,22 @@
             border-radius:12px;
             padding:14px 8px;
             text-align:center;
+            transition:transform .25s ease, box-shadow .3s ease;
+        }
+        .stat-box:hover {
+            transform:translateY(-3px);
+            box-shadow:0 8px 24px rgba(168,85,247,.12);
         }
 
         .stat-number {
             font-size:20px;
             font-weight:900;
             color:#a855f7;
+            animation:numberGlow 3s ease-in-out infinite;
+        }
+        @keyframes numberGlow {
+            0%,100% { text-shadow:0 0 6px rgba(168,85,247,.2); }
+            50%     { text-shadow:0 0 16px rgba(168,85,247,.5); }
         }
 
         .stat-label {
@@ -138,23 +340,38 @@
             margin-top:4px;
         }
 
+        /* ── footer ── */
         .footer {
             text-align:center;
             padding-top:20px;
             border-top:1px solid rgba(168,85,247,.08);
             font-size:12px;
             color:#4a4565;
+            animation:fadeSlideUp .6s ease-out .9s both;
+        }
+
+        /* ── shared keyframes ── */
+        @keyframes fadeSlideUp {
+            from { opacity:0; transform:translateY(24px); }
+            to   { opacity:1; transform:translateY(0); }
         }
     </style>
 </head>
 
 <body>
+
+    <!-- floating particles -->
+    <div class="particles" id="particles"></div>
+
     <div class="container">
 
         <div class="header">
-            <img class="avatar"
-                 src="https://raw.githubusercontent.com/thehiddencrowncr/thehiddencrowncr.github.io/main/channels4_profile.jpg"
-                 alt="Dark Arena Lore">
+            <div class="avatar-wrap">
+                <div class="avatar-glow"></div>
+                <img class="avatar"
+                     src="https://raw.githubusercontent.com/thehiddencrowncr/thehiddencrowncr.github.io/main/channels4_profile.jpg"
+                     alt="Dark Arena Lore">
+            </div>
 
             <div class="brand-name">Dark Arena Lore</div>
             <div class="tagline">
@@ -168,20 +385,56 @@
             <div>EP1: P.E.K.K.A — She was a little girl trapped in armor 💀</div>
             <a href="https://www.youtube.com/shorts/ZE2Ykk_qXUg"
                target="_blank"
-               class="featured-btn">Watch Now</a>
+               class="featured-btn">▶ Watch Now</a>
         </div>
 
         <div class="links">
-            <a href="https://www.youtube.com/@thehiddencrowncr/" target="_blank" class="link-btn">
-                YouTube →
+
+            <!-- YouTube -->
+            <a href="https://www.youtube.com/@thehiddencrowncr/" target="_blank" class="link-btn yt">
+                <span class="link-icon">
+                    <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.546 12 3.546 12 3.546s-7.505 0-9.377.504A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.504 9.376.504 9.376.504s7.505 0 9.377-.504a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                </span>
+                <span class="link-text">YouTube</span>
+                <span class="link-arrow">→</span>
             </a>
 
-            <a href="#" class="link-btn">TikTok →</a>
-            <a href="#" class="link-btn">Instagram →</a>
-            <a href="#" class="link-btn">X (Twitter) →</a>
-            <a href="#" class="link-btn">Discord →</a>
-            <a href="#" class="link-btn">Telegram →</a>
-            <a href="#" class="link-btn">Reddit →</a>
+            <!-- TikTok -->
+            <a href="#" target="_blank" class="link-btn tt">
+                <span class="link-icon">
+                    <svg viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
+                </span>
+                <span class="link-text">TikTok</span>
+                <span class="link-arrow">→</span>
+            </a>
+
+            <!-- Instagram -->
+            <a href="#" target="_blank" class="link-btn ig">
+                <span class="link-icon">
+                    <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+                </span>
+                <span class="link-text">Instagram</span>
+                <span class="link-arrow">→</span>
+            </a>
+
+            <!-- X (Twitter) -->
+            <a href="#" target="_blank" class="link-btn tw">
+                <span class="link-icon">
+                    <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                </span>
+                <span class="link-text">X (Twitter)</span>
+                <span class="link-arrow">→</span>
+            </a>
+
+            <!-- Threads -->
+            <a href="#" target="_blank" class="link-btn th">
+                <span class="link-icon">
+                    <svg viewBox="0 0 24 24"><path d="M12.186 24h-.007c-3.581-.024-6.334-1.205-8.184-3.509C2.35 18.44 1.5 15.586 1.472 12.01v-.017c.03-3.579.879-6.43 2.525-8.482C5.845 1.205 8.6.024 12.18 0h.014c2.746.02 5.043.725 6.826 2.098 1.677 1.29 2.858 3.13 3.509 5.467l-2.04.569c-1.104-3.96-3.898-5.984-8.304-6.015-2.91.022-5.11.936-6.54 2.717C4.307 6.504 3.616 8.914 3.59 12c.025 3.086.718 5.496 2.057 7.164 1.43 1.783 3.631 2.698 6.54 2.717 2.623-.02 4.358-.631 5.8-2.045 1.647-1.613 1.618-3.593 1.09-4.798-.31-.71-.873-1.3-1.634-1.75-.192 1.352-.622 2.446-1.289 3.276-.865 1.076-2.082 1.7-3.562 1.834-1.184.107-2.318-.118-3.192-.636-1.01-.6-1.64-1.508-1.771-2.558-.236-1.882 1.105-3.466 3.394-3.98.938-.21 1.964-.256 3.046-.136-.072-.408-.2-.778-.39-1.093-.4-.665-1.108-1.028-2.168-1.046h-.025c-.826.012-1.854.235-2.08.29l-.543-1.925c.378-.107 1.556-.378 2.637-.392h.042c1.608.027 2.776.602 3.469 1.71.359.575.598 1.272.719 2.06.927.234 1.752.577 2.47 1.028.152.095.296.196.436.302.07-.66.084-1.376.023-2.138l2.016-.262c.158 1.212.1 2.357-.166 3.404.597.698 1.046 1.528 1.298 2.452.5 1.834.326 4.29-1.675 6.253C18.326 23.18 15.836 23.98 12.186 24zM8.843 17.932c.063.503.37.924.864 1.216.592.35 1.375.498 2.205.421 1.065-.096 1.913-.533 2.506-1.27.46-.572.784-1.323.968-2.228-.757-.134-1.53-.176-2.28-.078-1.723.226-2.42 1.06-2.348 1.57.019.133.035.248.085.37z"/></svg>
+                </span>
+                <span class="link-text">Threads</span>
+                <span class="link-arrow">→</span>
+            </a>
+
         </div>
 
         <div class="stats">
@@ -204,5 +457,22 @@
         </div>
 
     </div>
+
+    <script>
+        // Generate floating particles
+        const container = document.getElementById('particles');
+        const count = 25;
+        for (let i = 0; i < count; i++) {
+            const p = document.createElement('div');
+            p.className = 'particle';
+            p.style.left = Math.random() * 100 + '%';
+            p.style.bottom = '-10px';
+            p.style.width = p.style.height = (Math.random() * 3 + 1.5) + 'px';
+            p.style.animationDuration = (Math.random() * 12 + 8) + 's';
+            p.style.animationDelay = (Math.random() * 10) + 's';
+            p.style.opacity = 0;
+            container.appendChild(p);
+        }
+    </script>
 </body>
 </html>
