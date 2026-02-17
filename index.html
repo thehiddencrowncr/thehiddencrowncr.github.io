@@ -1,7 +1,531 @@
 <!DOCTYPE html>
-<html>
-<head><title>Test</title></head>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dark Arena Lore — Clash Royale Dark Lore Series</title>
+    <meta name="description" content="The stories Clash Royale never told you. Dark cinematic lore series.">
+    <meta property="og:title" content="Dark Arena Lore — Clash Royale Dark Lore">
+    <meta property="og:description" content="The stories Clash Royale never told you 💀">
+    <meta property="og:image" content="YOUR_AVATAR_IMAGE_URL_HERE">
+    <meta property="og:type" content="website">
+    <link rel="icon" type="image/png" href="https://github.com/thehiddencrowncr/thehiddencrowncr.github.io/blob/main/channels4_profile.jpg">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 40px 20px 60px;
+            background: #0a0a12;
+            background-image:
+                radial-gradient(ellipse at 50% 0%, rgba(88, 28, 135, 0.15) 0%, transparent 60%),
+                radial-gradient(ellipse at 50% 100%, rgba(30, 10, 60, 0.2) 0%, transparent 60%);
+            overflow-x: hidden;
+        }
+
+        /* --- FLOATING PARTICLES --- */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                radial-gradient(1px 1px at 10% 20%, rgba(168, 85, 247, 0.4), transparent),
+                radial-gradient(1px 1px at 30% 60%, rgba(168, 85, 247, 0.3), transparent),
+                radial-gradient(1px 1px at 50% 10%, rgba(168, 85, 247, 0.2), transparent),
+                radial-gradient(1px 1px at 70% 80%, rgba(168, 85, 247, 0.4), transparent),
+                radial-gradient(1px 1px at 90% 40%, rgba(168, 85, 247, 0.3), transparent),
+                radial-gradient(1.5px 1.5px at 20% 90%, rgba(168, 85, 247, 0.5), transparent),
+                radial-gradient(1px 1px at 80% 15%, rgba(168, 85, 247, 0.3), transparent),
+                radial-gradient(1.5px 1.5px at 60% 50%, rgba(168, 85, 247, 0.2), transparent);
+            animation: drift 20s ease-in-out infinite alternate;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes drift {
+            0%   { transform: translateY(0px); }
+            100% { transform: translateY(-30px); }
+        }
+
+        .container {
+            max-width: 420px;
+            width: 100%;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* --- HEADER --- */
+        .header {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .avatar-wrapper {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+
+        .avatar-glow {
+            position: absolute;
+            top: -6px;
+            left: -6px;
+            right: -6px;
+            bottom: -6px;
+            border-radius: 50%;
+            background: conic-gradient(
+                from 0deg,
+                rgba(168, 85, 247, 0.8),
+                rgba(88, 28, 135, 0.2),
+                rgba(168, 85, 247, 0.6),
+                rgba(88, 28, 135, 0.2),
+                rgba(168, 85, 247, 0.8)
+            );
+            animation: spin 4s linear infinite;
+            filter: blur(2px);
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .avatar {
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #0a0a12;
+            position: relative;
+            z-index: 1;
+            background: #1a1a2e;
+        }
+
+        .brand-name {
+            font-size: 24px;
+            font-weight: 900;
+            color: #e2e0ff;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 6px;
+        }
+
+        .brand-name span {
+            background: linear-gradient(135deg, #a855f7, #7c3aed);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .tagline {
+            font-size: 14px;
+            color: #8b85a8;
+            font-weight: 400;
+            line-height: 1.5;
+        }
+
+        .tagline .skull {
+            font-style: normal;
+        }
+
+        /* --- FEATURED VIDEO --- */
+        .featured {
+            background: linear-gradient(135deg, rgba(88, 28, 135, 0.3), rgba(30, 10, 60, 0.4));
+            border: 1px solid rgba(168, 85, 247, 0.2);
+            border-radius: 16px;
+            padding: 16px;
+            margin-bottom: 24px;
+            text-align: center;
+        }
+
+        .featured-label {
+            font-size: 11px;
+            font-weight: 700;
+            color: #a855f7;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+        }
+
+        .featured-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: #d4d0f0;
+            margin-bottom: 12px;
+            line-height: 1.4;
+        }
+
+        .featured-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(135deg, #7c3aed, #a855f7);
+            color: #fff;
+            text-decoration: none;
+            padding: 10px 24px;
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(168, 85, 247, 0.3);
+        }
+
+        .featured-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 30px rgba(168, 85, 247, 0.5);
+        }
+
+        /* --- LINKS --- */
+        .links {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 32px;
+        }
+
+        .link-btn {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            background: rgba(26, 26, 46, 0.8);
+            border: 1px solid rgba(168, 85, 247, 0.12);
+            border-radius: 14px;
+            padding: 14px 18px;
+            text-decoration: none;
+            color: #d4d0f0;
+            font-size: 15px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .link-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(168, 85, 247, 0.06), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .link-btn:hover {
+            border-color: rgba(168, 85, 247, 0.4);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(168, 85, 247, 0.15);
+        }
+
+        .link-btn:hover::before {
+            left: 100%;
+        }
+
+        .link-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-size: 18px;
+        }
+
+        .link-icon.youtube    { background: rgba(255, 0, 0, 0.15); }
+        .link-icon.tiktok     { background: rgba(255, 255, 255, 0.1); }
+        .link-icon.instagram  { background: rgba(225, 48, 108, 0.15); }
+        .link-icon.twitter    { background: rgba(29, 161, 242, 0.15); }
+        .link-icon.discord    { background: rgba(88, 101, 242, 0.15); }
+        .link-icon.telegram   { background: rgba(0, 136, 204, 0.15); }
+        .link-icon.reddit     { background: rgba(255, 69, 0, 0.15); }
+
+        .link-text {
+            flex: 1;
+        }
+
+        .link-subtitle {
+            font-size: 11px;
+            color: #6b6590;
+            font-weight: 400;
+            margin-top: 2px;
+        }
+
+        .link-arrow {
+            color: #6b6590;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .link-btn:hover .link-arrow {
+            color: #a855f7;
+            transform: translateX(3px);
+        }
+
+        /* --- LATEST EPISODE --- */
+        .section-title {
+            font-size: 11px;
+            font-weight: 700;
+            color: #6b6590;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 12px;
+            padding-left: 4px;
+        }
+
+        /* --- STATS --- */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-bottom: 32px;
+        }
+
+        .stat-box {
+            background: rgba(26, 26, 46, 0.6);
+            border: 1px solid rgba(168, 85, 247, 0.08);
+            border-radius: 12px;
+            padding: 14px 8px;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 20px;
+            font-weight: 900;
+            color: #a855f7;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 10px;
+            color: #6b6590;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 4px;
+        }
+
+        /* --- FOOTER --- */
+        .footer {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(168, 85, 247, 0.08);
+        }
+
+        .footer-text {
+            font-size: 12px;
+            color: #4a4565;
+        }
+
+        .footer-text a {
+            color: #7c3aed;
+            text-decoration: none;
+        }
+
+        /* --- PULSE ANIMATION FOR NEW CONTENT --- */
+        .pulse-dot {
+            width: 8px;
+            height: 8px;
+            background: #22c55e;
+            border-radius: 50%;
+            display: inline-block;
+            animation: pulse 2s ease-in-out infinite;
+            margin-right: 6px;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50%      { opacity: 0.5; transform: scale(0.8); }
+        }
+
+        /* --- SVG ICONS --- */
+        .svg-icon {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+        }
+
+        .link-icon.youtube .svg-icon    { color: #ff0000; }
+        .link-icon.tiktok .svg-icon     { color: #ffffff; }
+        .link-icon.instagram .svg-icon  { color: #e1306c; }
+        .link-icon.twitter .svg-icon    { color: #1da1f2; }
+        .link-icon.discord .svg-icon    { color: #5865f2; }
+        .link-icon.telegram .svg-icon   { color: #0088cc; }
+        .link-icon.reddit .svg-icon     { color: #ff4500; }
+    </style>
+</head>
 <body>
-<h1>IT WORKS!</h1>
+    <div class="container">
+
+        <!-- HEADER -->
+        <div class="header">
+            <div class="avatar-wrapper">
+                <div class="avatar-glow"></div>
+                <!-- ЗАМІНИ src НА СВІЙ АВАТАР -->
+                <img class="avatar" src="https://github.com/thehiddencrowncr/thehiddencrowncr.github.io/blob/main/channels4_profile.jpg" alt="Dark Arena Lore">
+            </div>
+            <!-- ЗАМІНИ НАЗВУ НА СВОЮ -->
+            <div class="brand-name"><span>Dark Arena</span> Lore</div>
+            <div class="tagline">
+                The stories Clash Royale never told you <span class="skull">💀</span><br>
+                New dark lore every 2–3 days
+            </div>
+        </div>
+
+        <!-- FEATURED — LATEST EPISODE -->
+        <div class="featured">
+            <div class="featured-label">
+                <span class="pulse-dot"></span> Latest Episode
+            </div>
+            <div class="featured-title">
+                EP1: P.E.K.K.A — She was a little girl trapped in armor 💀
+            </div>
+            <!-- ЗАМІНИ ЛІНК НА СВОЄ ВІДЕО -->
+            <a href="https://www.youtube.com/shorts/ZE2Ykk_qXUg" target="_blank" class="featured-btn">
+                ▶ Watch Now
+            </a>
+        </div>
+
+        <!-- SOCIAL LINKS -->
+        <div class="section-title">Follow the lore</div>
+        <div class="links">
+
+            <!-- YOUTUBE — ЗАМІНИ ЛІНК -->
+            <a href="https://www.youtube.com/@thehiddencrowncr/" target="_blank" class="link-btn">
+                <div class="link-icon youtube">
+                    <svg class="svg-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                    </svg>
+                </div>
+                <div>
+                    <div class="link-text">YouTube</div>
+                    <div class="link-subtitle">Full dark lore series</div>
+                </div>
+                <div class="link-arrow">→</div>
+            </a>
+
+            <!-- TIKTOK — ЗАМІНИ ЛІНК -->
+            <a href="YOUR_TIKTOK_LINK" target="_blank" class="link-btn">
+                <div class="link-icon tiktok">
+                    <svg class="svg-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/>
+                    </svg>
+                </div>
+                <div>
+                    <div class="link-text">TikTok</div>
+                    <div class="link-subtitle">Quick lore clips</div>
+                </div>
+                <div class="link-arrow">→</div>
+            </a>
+
+            <!-- INSTAGRAM — ЗАМІНИ ЛІНК -->
+            <a href="YOUR_INSTAGRAM_LINK" target="_blank" class="link-btn">
+                <div class="link-icon instagram">
+                    <svg class="svg-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
+                    </svg>
+                </div>
+                <div>
+                    <div class="link-text">Instagram</div>
+                    <div class="link-subtitle">Behind the scenes + lore</div>
+                </div>
+                <div class="link-arrow">→</div>
+            </a>
+
+            <!-- TWITTER — ЗАМІНИ ЛІНК -->
+            <a href="YOUR_TWITTER_LINK" target="_blank" class="link-btn">
+                <div class="link-icon twitter">
+                    <svg class="svg-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                    </svg>
+                </div>
+                <div>
+                    <div class="link-text">X (Twitter)</div>
+                    <div class="link-subtitle">Lore theories & discussions</div>
+                </div>
+                <div class="link-arrow">→</div>
+            </a>
+
+            <!-- DISCORD — ЗАМІНИ ЛІНК -->
+            <a href="YOUR_DISCORD_INVITE_LINK" target="_blank" class="link-btn">
+                <div class="link-icon discord">
+                    <svg class="svg-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189z"/>
+                    </svg>
+                </div>
+                <div>
+                    <div class="link-text">Discord</div>
+                    <div class="link-subtitle">Join the community</div>
+                </div>
+                <div class="link-arrow">→</div>
+            </a>
+
+            <!-- TELEGRAM — ЗАМІНИ ЛІНК -->
+            <a href="YOUR_TELEGRAM_LINK" target="_blank" class="link-btn">
+                <div class="link-icon telegram">
+                    <svg class="svg-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
+                    </svg>
+                </div>
+                <div>
+                    <div class="link-text">Telegram</div>
+                    <div class="link-subtitle">Updates & UA community</div>
+                </div>
+                <div class="link-arrow">→</div>
+            </a>
+
+            <!-- REDDIT — ЗАМІНИ ЛІНК -->
+            <a href="YOUR_REDDIT_PROFILE_LINK" target="_blank" class="link-btn">
+                <div class="link-icon reddit">
+                    <svg class="svg-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0zm5.01 4.744c.688 0 1.25.561 1.25 1.249a1.25 1.25 0 0 1-2.498.056l-2.597-.547-.8 3.747c1.824.07 3.48.632 4.674 1.488.308-.309.73-.491 1.207-.491.968 0 1.754.786 1.754 1.754 0 .716-.435 1.333-1.01 1.614a3.111 3.111 0 0 1 .042.52c0 2.694-3.13 4.87-7.004 4.87-3.874 0-7.004-2.176-7.004-4.87 0-.183.015-.366.043-.534A1.748 1.748 0 0 1 4.028 12c0-.968.786-1.754 1.754-1.754.463 0 .898.196 1.207.49 1.207-.883 2.878-1.43 4.744-1.487l.885-4.182a.342.342 0 0 1 .14-.197.35.35 0 0 1 .238-.042l2.906.617a1.214 1.214 0 0 1 1.108-.701zM9.25 12C8.561 12 8 12.562 8 13.25c0 .687.561 1.248 1.25 1.248.687 0 1.248-.561 1.248-1.249 0-.688-.561-1.249-1.249-1.249zm5.5 0c-.687 0-1.248.561-1.248 1.25 0 .687.561 1.248 1.249 1.248.688 0 1.249-.561 1.249-1.249 0-.687-.562-1.249-1.25-1.249zm-5.466 3.99a.327.327 0 0 0-.231.094.33.33 0 0 0 0 .463c.842.842 2.484.913 2.961.913.477 0 2.105-.056 2.961-.913a.361.361 0 0 0 .029-.463.33.33 0 0 0-.464 0c-.547.533-1.684.73-2.512.73-.828 0-1.979-.196-2.512-.73a.326.326 0 0 0-.232-.095z"/>
+                    </svg>
+                </div>
+                <div>
+                    <div class="link-text">Reddit</div>
+                    <div class="link-subtitle">Lore posts & theories</div>
+                </div>
+                <div class="link-arrow">→</div>
+            </a>
+
+        </div>
+
+        <!-- STATS -->
+        <div class="section-title">Series progress</div>
+        <div class="stats">
+            <div class="stat-box">
+                <!-- ОНОВЛЮЙ ЦИФРИ -->
+                <span class="stat-number">1</span>
+                <div class="stat-label">Episodes</div>
+            </div>
+            <div class="stat-box">
+                <span class="stat-number">8</span>
+                <div class="stat-label">Planned</div>
+            </div>
+            <div class="stat-box">
+                <span class="stat-number">∞</span>
+                <div class="stat-label">Lore</div>
+            </div>
+        </div>
+
+        <!-- FOOTER -->
+        <div class="footer">
+            <div class="footer-text">
+                The stories Clash Royale never told you 💀
+            </div>
+        </div>
+
+    </div>
 </body>
 </html>
